@@ -39,7 +39,7 @@
     </a>
 </div>
 
-    <p class="in-reply-to">in reply to <a href="{{ wm_reply.in_reply_to }}" title="{{ wm_reply.in_reply_to }}" rel="nofollow">
+    <p class="in-reply-to">in reply to <a class="u-in-reply-to" href="{{ wm_reply.in_reply_to }}" title="{{ wm_reply.in_reply_to }}" rel="nofollow">
         this object
     </a></p>
 
@@ -86,7 +86,7 @@
     {% endif %}
 
     {% if object.in_reply_to %}
-    <p class="in-reply-to">in reply to <a href="{% if is_admin and object.is_in_reply_to_from_inbox %}{{ url_for("get_lookup") }}?query={% endif %}{{ object.in_reply_to }}" title="{{ object.in_reply_to }}" rel="nofollow">
+    <p class="in-reply-to">in reply to <a class="u-in-reply-to" href="{% if is_admin and object.is_in_reply_to_from_inbox %}{{ url_for("get_lookup") }}?query={% endif %}{{ object.in_reply_to }}" title="{{ object.in_reply_to }}" rel="nofollow">
             this object
         </a></p>
     {% endif %}
