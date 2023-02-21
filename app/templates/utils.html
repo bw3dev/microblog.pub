@@ -14,7 +14,7 @@
     </div>
     {% endif %}
     <div>
-        <a href="{{ og_meta.url | privacy_replace_url }}">{{ og_meta.title }}</a>
+        <a href="{{ og_meta.url | privacy_replace_url }}">{{ og_meta.title | truncate(200) }}</a>
         {% if og_meta.site_name %}
             <small>{{ og_meta.site_name }}</small>
         {% endif %}
