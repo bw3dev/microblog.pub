@@ -97,6 +97,8 @@ class Config(pydantic.BaseModel):
     name: str
     summary: str
     https: bool
+    use_n60: bool
+    use_n60_minutes: bool
     icon_url: str | None = None
     image_url: str | None = None
     secret: str
@@ -217,6 +219,8 @@ CODE_HIGHLIGHTING_THEME = CONFIG.code_highlighting_theme
 
 MOVED_TO = _get_moved_to()
 
+USE_N60 = CONFIG.use_n60
+USE_N60_MINUTES = CONFIG.use_n60_minutes
 
 _NavBarItem = tuple[str, str]
 

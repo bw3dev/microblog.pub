@@ -48,6 +48,11 @@ from app.utils.facepile import WebmentionReply
 from app.utils.text import slugify
 from app.utils.url import is_hostname_blocked
 
+import time
+import app.newbase60 as n6
+from app.config import USE_N60
+from app.config import USE_N60_MINUTES
+
 AnyboxObject = models.InboxObject | models.OutboxObject
 
 
@@ -63,6 +68,8 @@ def is_notification_enabled(notification_type: models.NotificationType) -> bool:
 
 
 def allocate_outbox_id() -> str:
+    if USE_N60:
+        return n6.numtosxg(int(time.time()/60) if USE_N60_MINUTES else time.time())
     return uuid.uuid4().hex
 
 
