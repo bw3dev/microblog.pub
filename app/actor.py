@@ -84,7 +84,7 @@ class Actor:
 
     @property
     def url(self) -> str | None:
-        return self.ap_actor.get("url") or self.ap_actor["id"]
+        return ap.as_list(self.ap_actor.get("url"))[0] or self.ap_actor["id"]
 
     @property
     def preferred_username(self) -> str:
