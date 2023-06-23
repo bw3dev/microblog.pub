@@ -1595,6 +1595,11 @@ Disallow: /admin
 Disallow: /remote_interaction
 Disallow: /remote_follow"""
 
+@app.get("/ai.txt", response_class=PlainTextResponse)
+async def robots_file():
+    return """User-Agent: *
+Disallow: /
+Disallow: *"""
 
 async def _get_outbox_for_feed(db_session: AsyncSession) -> list[models.OutboxObject]:
     return (
