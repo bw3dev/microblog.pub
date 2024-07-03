@@ -4,6 +4,11 @@
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!--Tentative support for problematic Mastodon proposed opengraph tag-->
+<meta name="fediverse:creator" content="0x3b0b@bw3.dev" />
+<!--Tentative support for proposed improvements on Mastodon proposed opengraph tag-->
+<link rel="author" type="application/jrd+json" href="acct:0x3b0b@bw3.dev" />
+<link rel="author" type="application/activity+json" href="https://bw3.dev" />
 <link rel="stylesheet" href="{{ BASE_URL }}/static/css/main.css?v={{ CSS_HASH }}">
 <link rel="alternate" title="{{ local_actor.display_name}}'s microblog" type="application/json" href="{{ url_for("json_feed") }}" />
 <link rel="alternate" href="{{ url_for("rss_feed") }}" type="application/rss+xml" title="{{ local_actor.display_name}}'s microblog">
