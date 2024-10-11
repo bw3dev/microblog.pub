@@ -124,7 +124,7 @@ async def get_lookup(
                     return RedirectResponse(
                         str(request.url_for("admin_profile"))
                         + f"?actor_id={ap_object.ap_id}",
-                        status_code=302,
+                        status_code=303,
                     )
 
                 actors_metadata = await get_actors_metadata(
@@ -140,7 +140,7 @@ async def get_lookup(
                         str(request.url_for("admin_object"))
                         + f"?ap_id={ap_object.ap_id}#"
                         + requested_object.permalink_id,
-                        status_code=302,
+                        status_code=303,
                     )
 
                 actors_metadata = await get_actors_metadata(
@@ -892,7 +892,7 @@ async def admin_actions_force_delete(
     )
     ap_object_to_delete.is_deleted = True
     await db_session.commit()
-    return RedirectResponse(redirect_url, status_code=302)
+    return RedirectResponse(redirect_url, status_code=303)
 
 
 @router.post("/actions/force_delete_webmention", response_model=None)
@@ -928,7 +928,7 @@ async def admin_actions_force_delete_webmention(
         f"Deleted {notif_deletion_result.rowcount} notifications"  # type: ignore
     )
     await db_session.commit()
-    return RedirectResponse(redirect_url, status_code=302)
+    return RedirectResponse(redirect_url, status_code=303)
 
 
 @router.post("/actions/follow", response_model=None)
@@ -941,7 +941,7 @@ async def admin_actions_follow(
 ) -> RedirectResponse:
     logger.info(f"Following {ap_actor_id}")
     await send_follow(db_session, ap_actor_id)
-    return RedirectResponse(redirect_url, status_code=302)
+    return RedirectResponse(redirect_url, status_code=303)
 
 
 @router.post("/actions/block", response_model=None)
@@ -953,7 +953,7 @@ async def admin_actions_block(
     db_session: AsyncSession = Depends(get_db_session),
 ) -> RedirectResponse:
     await send_block(db_session, ap_actor_id)
-    return RedirectResponse(redirect_url, status_code=302)
+    return RedirectResponse(redirect_url, status_code=303)
 
 
 @router.post("/actions/unblock", response_model=None)
@@ -966,7 +966,7 @@ async def admin_actions_unblock(
 ) -> RedirectResponse:
     logger.info(f"Unblocking {ap_actor_id}")
     await send_unblock(db_session, ap_actor_id)
-    return RedirectResponse(redirect_url, status_code=302)
+    return RedirectResponse(redirect_url, status_code=303)
 
 
 @router.post("/actions/hide_announces", response_model=None)
@@ -980,7 +980,7 @@ async def admin_actions_hide_announces(
     actor = await fetch_actor(db_session, ap_actor_id)
     actor.are_announces_hidden_from_stream = True
     await db_session.commit()
-    return RedirectResponse(redirect_url, status_code=302)
+    return RedirectResponse(redirect_url, status_code=303)
 
 
 @router.post("/actions/show_announces", response_model=None)
@@ -994,7 +994,7 @@ async def admin_actions_show_announces(
     actor = await fetch_actor(db_session, ap_actor_id)
     actor.are_announces_hidden_from_stream = False
     await db_session.commit()
-    return RedirectResponse(redirect_url, status_code=302)
+    return RedirectResponse(redirect_url, status_code=303)
 
 
 @router.post("/actions/delete", response_model=None)
@@ -1006,7 +1006,7 @@ async def admin_actions_delete(
     db_session: AsyncSession = Depends(get_db_session),
 ) -> RedirectResponse:
     await boxes.send_delete(db_session, ap_object_id)
-    return RedirectResponse(redirect_url, status_code=302)
+    return RedirectResponse(redirect_url, status_code=303)
 
 
 @router.post("/actions/accept_incoming_follow", response_model=None)
@@ -1018,7 +1018,7 @@ async def admin_actions_accept_incoming_follow(
     db_session: AsyncSession = Depends(get_db_session),
 ) -> RedirectResponse:
     await boxes.send_accept(db_session, notification_id)
-    return RedirectResponse(redirect_url, status_code=302)
+    return RedirectResponse(redirect_url, status_code=303)
 
 
 @router.post("/actions/reject_incoming_follow", response_model=None)
@@ -1030,7 +1030,7 @@ async def admin_actions_reject_incoming_follow(
     db_session: AsyncSession = Depends(get_db_session),
 ) -> RedirectResponse:
     await boxes.send_reject(db_session, notification_id)
-    return RedirectResponse(redirect_url, status_code=302)
+    return RedirectResponse(redirect_url, status_code=303)
 
 
 @router.post("/actions/like", response_model=None)
@@ -1042,7 +1042,7 @@ async def admin_actions_like(
     db_session: AsyncSession = Depends(get_db_session),
 ) -> RedirectResponse:
     await boxes.send_like(db_session, ap_object_id)
-    return RedirectResponse(redirect_url, status_code=302)
+    return RedirectResponse(redirect_url, status_code=303)
 
 
 @router.post("/actions/undo", response_model=None)
@@ -1054,7 +1054,7 @@ async def admin_actions_undo(
     db_session: AsyncSession = Depends(get_db_session),
 ) -> RedirectResponse:
     await boxes.send_undo(db_session, ap_object_id)
-    return RedirectResponse(redirect_url, status_code=302)
+    return RedirectResponse(redirect_url, status_code=303)
 
 
 @router.post("/actions/announce", response_model=None)
@@ -1066,7 +1066,7 @@ async def admin_actions_announce(
     db_session: AsyncSession = Depends(get_db_session),
 ) -> RedirectResponse:
     await boxes.send_announce(db_session, ap_object_id)
-    return RedirectResponse(redirect_url, status_code=302)
+    return RedirectResponse(redirect_url, status_code=303)
 
 
 @router.post("/actions/bookmark", response_model=None)
@@ -1084,7 +1084,7 @@ async def admin_actions_bookmark(
         inbox_object = await boxes.save_object_to_inbox(db_session, raw_object)
     inbox_object.is_bookmarked = True
     await db_session.commit()
-    return RedirectResponse(redirect_url, status_code=302)
+    return RedirectResponse(redirect_url, status_code=303)
 
 
 @router.post("/actions/unbookmark", response_model=None)
@@ -1100,7 +1100,7 @@ async def admin_actions_unbookmark(
         raise ValueError("Should never happen")
     inbox_object.is_bookmarked = False
     await db_session.commit()
-    return RedirectResponse(redirect_url, status_code=302)
+    return RedirectResponse(redirect_url, status_code=303)
 
 
 @router.post("/actions/pin", response_model=None)
@@ -1116,7 +1116,7 @@ async def admin_actions_pin(
         raise ValueError("Should never happen")
     outbox_object.is_pinned = True
     await db_session.commit()
-    return RedirectResponse(redirect_url, status_code=302)
+    return RedirectResponse(redirect_url, status_code=303)
 
 
 @router.post("/actions/unpin", response_model=None)
@@ -1132,7 +1132,7 @@ async def admin_actions_unpin(
         raise ValueError("Should never happen")
     outbox_object.is_pinned = False
     await db_session.commit()
-    return RedirectResponse(redirect_url, status_code=302)
+    return RedirectResponse(redirect_url, status_code=303)
 
 
 @router.post("/actions/new", response_model=None)
@@ -1218,7 +1218,7 @@ async def admin_actions_new(
     )
     return RedirectResponse(
         request.url_for("outbox_by_public_id", public_id=public_id),
-        status_code=302,
+        status_code=303,
     )
 
 
@@ -1291,7 +1291,7 @@ async def admin_actions_edit_text(
 
     return RedirectResponse(
         request.url_for("outbox_by_public_id", public_id=public_id),
-        status_code=302,
+        status_code=303,
     )
 
 
@@ -1311,7 +1311,7 @@ async def admin_actions_vote(
         in_reply_to=in_reply_to,
         names=names,
     )
-    return RedirectResponse(redirect_url, status_code=302)
+    return RedirectResponse(redirect_url, status_code=303)
 
 
 @unauthenticated_router.get("/login", response_model=None)
@@ -1320,7 +1320,7 @@ async def login(
     db_session: AsyncSession = Depends(get_db_session),
 ) -> templates.TemplateResponse | RedirectResponse:
     if is_current_user_admin(request):
-        return RedirectResponse(request.url_for("admin_stream"), status_code=302)
+        return RedirectResponse(request.url_for("admin_stream"), status_code=303)
 
     return await templates.render_template(
         db_session,
@@ -1356,7 +1356,7 @@ async def login_validation(
         )
 
     resp = RedirectResponse(
-        redirect or request.url_for("admin_stream"), status_code=302
+        redirect or request.url_for("admin_stream"), status_code=303
     )
     resp.set_cookie("session", session_serializer.dumps({"is_logged_in": True}))  # type: ignore  # noqa: E501
 
@@ -1367,6 +1367,6 @@ async def login_validation(
 async def logout(
     request: Request,
 ) -> RedirectResponse:
-    resp = RedirectResponse(request.url_for("index"), status_code=302)
+    resp = RedirectResponse(request.url_for("index"), status_code=303)
     resp.set_cookie("session", session_serializer.dumps({"is_logged_in": False}))  # type: ignore  # noqa: E501
     return resp
