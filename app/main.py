@@ -1641,6 +1641,12 @@ Disallow: /
 User-agent: PerplexityBot
 Disallow: /
 User-agent: cohere-ai
+Disallow: /
+User-agent: facebookexternalhit
+Disallow: /
+User-agent: facebookcatalog
+Disallow: /
+User-agent: meta-externalagent
 Disallow: /"""
 
 @app.get("/ai.txt", response_class=PlainTextResponse)
