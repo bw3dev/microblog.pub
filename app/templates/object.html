@@ -28,7 +28,7 @@
 {% include "header.html" %}
 {% endif %}
 
-{% macro display_replies_tree(replies_tree_node) %}
+{% macro display_replies_tree(replies_tree_node, is_comment=False) %}
 
 {% if replies_tree_node.is_requested %}
 {{ utils.display_object(replies_tree_node.ap_object, likes=likes, shares=shares, webmentions=webmentions, expanded=not replies_tree_node.is_root, is_object_page=True, is_h_entry=False) }}
@@ -37,14 +37,14 @@
         {# u-comment h-cite is displayed by default for webmention #}
         {{ utils.display_webmention_reply(replies_tree_node.wm_reply) }}
     {% else %}
-        <div class="u-comment h-cite">
+        <div class="{% if is_comment %}u-comment{% else %}u-in-reply-to{% endif %} h-cite">
             {{ utils.display_object(replies_tree_node.ap_object, is_h_entry=False) }}
         </div>
     {% endif %}
 {% endif %}
 
 {% for child in replies_tree_node.children %}
-    {{ display_replies_tree(child) }}
+    {{ display_replies_tree(child, is_comment or replies_tree_node.is_requested) }}
 {% endfor %}
 
 {% endmacro %}

@@ -52,7 +52,7 @@
         <li>{{ header_link("following", "Following") }} <span class="counter">{{ following_count }}</span></li>
         {% endif %}
         {% for navbar_item in NAVBAR_ITEMS.EXTRA_NAVBAR_ITEMS %}
-            {{ navbar_item_link(navbar_item) }}
+        <li>{{ navbar_item_link(navbar_item) }}</li>
         {% endfor %}
     </ul>
 </nav>
