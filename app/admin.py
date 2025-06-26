@@ -140,7 +140,7 @@ async def get_lookup(
                         str(request.url_for("admin_object"))
                         + f"?ap_id={ap_object.ap_id}#"
                         + requested_object.permalink_id,
-                        status_code=303,
+                        status_code=307,
                     )
 
                 actors_metadata = await get_actors_metadata(
