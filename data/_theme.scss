@@ -1,11 +1,49 @@
-$font-stack: "Inconsolata", monospace;
-$background: #ffff;
-$light-background: #f8f9fa;
-$text-color: #0d1e2d;
-$primary-color: #1d781d;
-$secondary-color: #781D78;
-$form-background-color: #f8f9fa;
-$form-text-color: #0d1e2d;
-$muted-color: #555; // solarized comment text
-$primary-button-text-color: #f8f9fa;
-$code-highlight-background: #f0f0f0;
+// override vars for theming here
+$font-stack: Inconsolata, monospace;           
+$background: #002B3B;
+$light-background: #1B2B3B;
+$text-color: #B0B0B0;      
+$primary-color: #3B0B;
+$secondary-color: #FBF;
+$form-background-color: #1B2B3B;
+$form-text-color: #B0B0B0;
+$nav-button-background-color: #1B2B3B;
+$nav-button-text-color: #B0B0B0;
+$muted-color: #BAB; // solarized comment text
+$primary-button-text-color: #BBB;
+$code-highlight-background: #1B2B3B;
+
+#header {
+  padding: 20px;
+  background-image: url("/static/banner.jpg");
+}
+
+#header>div {
+  background-color: rgba(0,0,0,0.8);
+  padding: 0 20px;
+  margin: 0 -20px;
+}
+
+#header>div>div#profile-props>dl {
+    margin: 0;
+}
+
+nav ul button {
+  line-height: revert;
+}
+
+#admin .admin-menu {
+    height: 40px;
+}
+  
+#admin nav.flexbox {
+  position: fixed;
+  opacity: 100%;
+  background: $background;
+}
+
+#notifications div.h-entry nav ul * {
+  padding: 2px 0;
+  line-height: normal;
+  font-size: 16px;
+}
