@@ -71,6 +71,7 @@ def set_moved_to(moved_to: str) -> None:
     MOVED_TO_FILE.write_text(moved_to)
 
 
+VERSION = f"2+custom" #f"2.0.0+{VERSION_COMMIT}"
 USER_AGENT = f"microblogpub/{VERSION}"
 AP_CONTENT_TYPE = "application/activity+json"
 
