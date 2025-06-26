@@ -283,7 +283,7 @@ class BaseModel(pydantic.BaseModel):
 
 
 class Attachment(BaseModel):
-    type: str
+    type: str | None = None
     media_type: str | None = None
     name: str | None = None
     url: str
