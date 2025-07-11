@@ -286,7 +286,7 @@ class Attachment(BaseModel):
     type: str | None = None
     media_type: str | None = None
     name: str | None = None
-    url: str
+    url: str | None = None
 
     # Extra fields for the templates (and only for media)
     proxied_url: str | None = None
