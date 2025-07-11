@@ -51,6 +51,7 @@
         {% if not HIDES_FOLLOWING or is_admin %}
         <li>{{ header_link("following", "Following") }} <span class="counter">{{ following_count }}</span></li>
         {% endif %}
+        <!--y tho-->
         {% for navbar_item in NAVBAR_ITEMS.EXTRA_NAVBAR_ITEMS %}
         <li>{{ navbar_item_link(navbar_item) }}</li>
         {% endfor %}
